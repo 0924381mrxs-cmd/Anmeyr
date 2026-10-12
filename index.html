@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#087d4b">
+<title>نماء | المحفظة السودانية</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f7f4;color:#17382a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{max-width:460px;margin:auto;min-height:100vh;background:#fff;position:relative;padding-bottom:85px}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #edf1ee}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:46px;height:46px;border-radius:15px;background:#087d4b;color:white;display:grid;place-items:center;font-size:25px;font-weight:bold}
+.brand h1{font-size:22px;margin:0;color:#087d4b}
+.brand small{color:#718278}
+.bell{border:0;background:#f0f7f2;border-radius:12px;padding:11px}
+main{padding:18px}
+.welcome{font-size:18px;font-weight:bold;margin-bottom:16px}
+.balance{background:linear-gradient(135deg,#087d4b,#13a66a);color:white;border-radius:22px;padding:23px 20px;margin-bottom:22px;box-shadow:0 8px 22px #087d4b22}
+.balance small{opacity:.9}
+.amount{font-size:31px;font-weight:bold;margin:12px 0}
+.balance button{border:1px solid #ffffff70;background:#ffffff18;color:white;border-radius:10px;padding:7px 12px}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:20px 0 25px}
+.quick button{border:0;background:white;color:#254b38;display:flex;align-items:center;flex-direction:column;gap:9px;font-size:12px;padding:8px 2px}
+.qicon{height:51px;width:51px;border-radius:17px;background:#eaf6ee;display:grid;place-items:center;color:#087d4b;font-size:24px}
+.section-title{display:flex;justify-content:space-between;align-items:center;font-weight:bold;margin:23px 0 13px}
+.section-title span{font-size:14px;color:#087d4b}
+.services{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.service{border:1px solid #e8eee9;border-radius:16px;padding:15px;background:white;text-align:right}
+.service .ico{font-size:25px;margin-bottom:10px}
+.service b{display:block;font-size:14px}
+.service small{display:block;color:#839087;margin-top:6px;font-size:12px}
+.transaction{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #edf1ee}
+.txicon{width:42px;height:42px;border-radius:14px;background:#edf7ef;display:grid;place-items:center;font-size:20px}
+.txinfo{flex:1}
+.txinfo b{font-size:14px}
+.txinfo small{display:block;color:#87938b;margin-top:5px}
+.txamount{font-weight:bold;font-size:14px}
+.positive{color:#07834b}.negative{color:#d44e4e}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(460px,100%);display:flex;justify-content:space-around;background:#fff;border-top:1px solid #e7eee8;padding:10px 5px calc(10px + env(safe-area-inset-bottom));z-index:10}
+nav button{background:none;border:0;color:#829087;font-size:11px;display:flex;align-items:center;gap:5px;flex-direction:column}
+nav button strong{font-size:21px;font-weight:normal}
+nav button.active{color:#087d4b}
+.screen{display:none}.screen.active{display:block}
+.formbox{border:1px solid #e6eee8;border-radius:18px;padding:17px;margin-top:10px}
+.formbox h3{margin:0 0 18px}
+label{display:block;font-size:13px;margin:14px 0 7px;color:#4b6254}
+input,select{width:100%;padding:13px;border:1px solid #dfe8e1;border-radius:12px;background:#fbfdfb;outline-color:#087d4b}
+.primary{width:100%;border:0;border-radius:13px;background:#087d4b;color:white;padding:14px;font-weight:bold;margin-top:20px}
+.secondary{background:#eaf6ee;color:#087d4b}
+.notice{padding:12px;border-radius:12px;background:#fff8e7;color:#795b13;font-size:12px;line-height:1.8;margin-top:14px}
+.networks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.network{border:1px solid #e2e9e3;background:white;border-radius:12px;padding:12px 4px}
+.network.selected{border:2px solid #087d4b;background:#f0faf3}
+.network b{display:block;margin-top:5px}
+.network .nlogo{font-size:15px;font-weight:bold;padding:7px 2px;border-radius:8px;background:#eee}
+.empty{color:#87938b;font-size:13px;text-align:center;padding:20px}
+.profile{text-align:center;padding:25px 0}
+.avatar{width:75px;height:75px;border-radius:25px;background:#eaf6ee;color:#087d4b;display:grid;place-items:center;font-size:32px;margin:auto auto 12px}
+.rowinfo{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #edf1ee;font-size:14px}
+</style>
+</head>
+
+<body>
+<div class="app">
+<header>
+  <div class="brand">
+    <div class="logo">ن</div>
+    <div><h1>نماء</h1><small>المحفظة السودانية</small></div>
+  </div>
+  <button class="bell" onclick="notify('هذه نسخة تجريبية')">♧</button>
+</header>
+
+<main>
+<section id="home" class="screen active">
+  <div class="welcome">مرحباً بك في نماء 👋</div>
+
+  <div class="balance">
+    <small>الرصيد المتاح في المحفظة</small>
+    <div class="amount" id="balance">25,000 ج.س</div>
+    <button onclick="toggleBalance()">إخفاء / إظهار الرصيد</button>
+    <p style="font-size:11px;margin-bottom:0">رصيد تجريبي للعرض فقط</p>
+  </div>
+
+  <div class="section-title">الخدمات السريعة</div>
+  <div class="quick">
+    <button onclick="showScreen('transfer')"><span class="qicon">⇄</span>تحويل</button>
+    <button onclick="showScreen('airtime')"><span class="qicon">▣</span>شحن رصيد</button>
+    <button onclick="showScreen('deposit')"><span class="qicon">＋</span>إيداع</button>
+    <button onclick="showScreen('history')"><span class="qicon">◷</span>السجل</button>
+  </div>
+
+  <div class="section-title">خدمات نماء</div>
+  <div class="services">
+    <button class="service" onclick="showScreen('transfer')"><div class="ico">💸</div><b>التحويل الداخلي</b><small>تحويل تجريبي لمحفظة أخرى</small></button>
+    <button class="service" onclick="showScreen('airtime')"><div class="ico">📱</div><b>شحن الهاتف</b><small>سوداني وزين و MTN</small></button>
+    <button class="service" onclick="showScreen('deposit')"><div class="ico">🏪</div><b>الإيداع عبر وكيل</b><small>تسجيل طلب إيداع تجريبي</small></button>
+    <button class="service" onclick="showScreen('profile')"><div class="ico">👤</div><b>حسابي</b><small>بيانات المحفظة</small></button>
+  </div>
+
+  <div class="section-title">آخر العمليات <span onclick="showScreen('history')">عرض الكل</span></div>
+  <div id="recent"><div class="empty">لا توجد عمليات حتى الآن</div></div>
+</section>
+
+<section id="transfer" class="screen">
+  <div class="section-title">تحويل الأموال</div>
+  <div class="formbox">
+    <h3>تحويل إلى محفظة نماء</h3>
+    <label>رقم هاتف المستلم</label>
+    <input id="recipient" type="tel" placeholder="أدخل رقم الهاتف">
+    <label>المبلغ بالجنيه السوداني</label>
+    <input id="transferAmount" type="number" min="1" placeholder="مثال: 1000">
+    <label>ملاحظات (اختياري)</label>
+    <input id="transferNote" placeholder="سبب التحويل">
+    <button class="primary" onclick="transfer()">تأكيد التحويل التجريبي</button>
+    <div class="notice">لن يتم إرسال أموال حقيقية. هذه العملية تُسجّل داخل الصفحة فقط.</div>
+  </div>
+</section>
+
+<section id="airtime" class="screen">
+  <div class="section-title">شحن رصيد الهاتف</div>
+  <div class="formbox">
+    <h3>اختر شبكة الاتصال</h3>
+    <div class="networks">
+      <button class="network selected" onclick="chooseNetwork('سوداني',this)"><span class="nlogo" style="background:#e7f0ff;color:#1761b1">سوداني</span><b>سوداني</b></button>
+      <button class="network" onclick="chooseNetwork('زين',this)"><span class="nlogo" style="background:#f0e6ff;color:#6829a4">zain</span><b>زين</b></button>
+      <button class="network" onclick="chooseNetwork('MTN',this)"><span class="nlogo" style="background:#fff2a8;color:#222">MTN</span><b>MTN</b></button>
+    </div>
+    <label>رقم الهاتف</label>
+    <input id="phone" type="tel" placeholder="أدخل رقم الهاتف">
+    <label>قيمة الشحن بالجنيه السوداني</label>
+    <input id="airtimeAmount" type="number" min="1" placeholder="مثال: 5000">
+    <button class="primary" onclick="topup()">متابعة الشحن التجريبي</button>
+    <div class="notice">الشحن الحقيقي يحتاج ربط الموقع بمزوّد خدمة اتصالات معتمد.</div>
+  </div>
+</section>
+
+<section id="deposit" class="screen">
+  <div class="section-title">الإيداع عبر وكيل</div>
+  <div class="formbox">
+    <h3>تسجيل طلب إيداع</h3>
+    <label>رقم هاتفك المسجل</label>
+    <input id="depositPhone" type="tel" placeholder="رقم الهاتف">
+    <label>مبلغ الإيداع بالجنيه السوداني</label>
+    <input id="depositAmount" type="number" min="1" placeholder="أدخل المبلغ">
+    <label>اسم الوكيل أو موقعه</label>
+    <input id="agent" placeholder="اسم الوكيل أو المنطقة">
+    <button class="primary" onclick="deposit()">تسجيل الطلب التجريبي</button>
+    <div class="notice">لن يصل الطلب إلى وكيل حقيقي في هذه النسخة. لا تدفع أي مبلغ بناءً على هذه الصفحة.</div>
+  </div>
+</section>
+
+<section id="history" class="screen">
+  <div class="section-title">سجل العمليات</div>
+  <div id="allTransactions"><div class="empty">لا توجد عمليات مسجلة</div></div>
+  <button class="primary secondary" onclick="showScreen('home')">العودة للرئيسية</button>
+</section>
+
+<section id="profile" class="screen">
+  <div class="profile">
+    <div class="avatar">👤</div>
+    <h3>مستخدم نماء</h3>
+    <small style="color:#87938b">المحفظة السودانية — نسخة تجريبية</small>
+  </div>
+  <div class="rowinfo"><span>اسم المحفظة</span><b>نماء</b></div>
+  <div class="rowinfo"><span>العملة</span><b>الجنيه السوداني</b></div>
+  <div class="rowinfo"><span>الرصيد التجريبي</span><b>25,000 ج.س</b></div>
+  <div class="rowinfo"><span>حالة الحساب</span><b style="color:#087d4b">عرض تجريبي</b></div>
+  <div class="notice">هذه النسخة لا تحتوي على تسجيل دخول آمن أو قاعدة بيانات أو خدمات مالية حقيقية.</div>
+</section>
+</main>
+
+<nav>
+  <button class="active" data-screen="home" onclick="showScreen('home')"><strong>⌂</strong>الرئيسية</button>
+  <button data-screen="transfer" onclick="showScreen('transfer')"><strong>⇄</strong>تحويل</button>
+  <button data-screen="airtime" onclick="showScreen('airtime')"><strong>▣</strong>شحن</button>
+  <button data-screen="history" onclick="showScreen('history')"><strong>◷</strong>العمليات</button>
+  <button data-screen="profile" onclick="showScreen('profile')"><strong>♙</strong>حسابي</button>
+</nav>
+</div>
+
+<script>
+let balance=25000;
+let hidden=false;
+let network='سوداني';
+let transactions=[];
+
+function notify(message){alert(message)}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b=>{
+    b.classList.toggle('active',b.dataset.screen===id);
+  });
+  window.scrollTo(0,0);
+}
+
+function toggleBalance(){
+  hidden=!hidden;
+  document.getElementById('balance').textContent=
+    hidden?'•••••• ج.س':balance.toLocaleString('en-US')+' ج.س';
+}
+
+function addTransaction(title,amount,type,details){
+  transactions.unshift({
+    title,
+    amount,
+    type,
+    details,
+    date:new Date().toLocaleString('ar-SD')
+  });
+  renderTransactions();
+}
+
+function renderTransactions(){
+  const html=transactions.map(t=>`
+    <div class="transaction">
+      <div class="txicon">${t.type==='in'?'↓': '↑'}</div>
+      <div class="txinfo">
+        <b>${escapeHTML(t.title)}</b>
+        <small>${escapeHTML(t.details)} · ${escapeHTML(t.date)}</small>
+      </div>
+      <div class="txamount ${t.type==='in'?'positive':'negative'}">
+        ${t.type==='in'?'+':'−'}${Number(t.amount).toLocaleString('en-US')} ج.س
+      </div>
+    </div>`).join('');
+  document.getElementById('recent').innerHTML=
+    html.slice(0,3)||'<div class="empty">لا توجد عمليات حتى الآن</div>';
+  document.getElementById('allTransactions').innerHTML=
+    html||'<div class="empty">لا توجد عمليات مسجلة</div>';
+}
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,c=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+function transfer(){
+  const phone=document.getElementById('recipient').value.trim();
+  const amount=Number(document.getElementById('transferAmount').value);
+  const note=document.getElementById('transferNote').value.trim()||'تحويل داخلي';
+  if(!phone||!amount||amount<=0)return notify('أدخل رقم المستلم والمبلغ بصورة صحيحة');
+  if(amount>balance)return notify('الرصيد التجريبي غير كافٍ');
+  if(!confirm('هل تريد تسجيل تحويل تجريبي بقيمة '+amount.toLocaleString('en-US')+' ج.س إلى '+phone+'؟'))return;
+  balance-=amount;
+  addTransaction('تحويل تجريبي',amount,'out','إلى '+phone+' — '+note);
+  updateBalance();
+  document.getElementById('recipient').value='';
+  document.getElementById('transferAmount').value='';
+  document.getElementById('transferNote').value='';
+  notify('تم تسجيل العملية داخل العرض التجريبي فقط، ولم تُرسل أموال.');
+  showScreen('history');
+}
+
+function chooseNetwork(name,button){
+  network=name;
+  document.querySelectorAll('.network').forEach(b=>b.classList.remove('selected'));
+  button.classList.add('selected');
+}
+
+function topup(){
+  const phone=document.getElementById('phone').value.trim();
+  const amount=Number(document.getElementById('airtimeAmount').value);
+  if(!phone||!amount||amount<=0)return notify('أدخل رقم الهاتف ومبلغ الشحن');
+  if(amount>balance)return notify('الرصيد التجريبي غير كافٍ');
+  if(!confirm('تسجيل شحن تجريبي لشبكة '+network+' بقيمة '+amount.toLocaleString('en-US')+' ج.س؟'))return;
+  balance-=amount;
+  addTransaction('شحن '+network,amount,'out','رقم '+phone);
+  updateBalance();
+  document.getElementById('phone').value='';
+  document.getElementById('airtimeAmount').value='';
+  notify('سُجّلت العملية في العرض فقط. لم يتم شحن الهاتف فعلياً.');
+  showScreen('history');
+}
+
+function deposit(){
+  const phone=document.getElementById('depositPhone').value.trim();
+  const amount=Number(document.getElementById('depositAmount').value);
+  const agent=document.getElementById('agent').value.trim();
+  if(!phone||!amount||amount<=0||!agent)return notify('أكمل جميع البيانات بصورة صحيحة');
+  addTransaction('طلب إيداع تجريبي',amount,'in','الوكيل: '+agent+' — هاتف '+phone);
+  document.getElementById('depositPhone').value='';
+  document.getElementById('depositAmount').value='';
+  document.getElementById('agent').value='';
+  notify('تم تسجيل الطلب داخل الصفحة فقط. لم تتم إضافة أموال إلى الرصيد.');
+  showScreen('history');
+}
+
+function updateBalance(){
+  document.getElementById('balance').textContent=
+    hidden?'•••••• ج.س':balance.toLocaleString('en-US')+' ج.س';
+}
+</script>
+</body>
+</html>
+<footer style="text-align:center;padding:20px 12px;color:#718278;font-size:12px;border-top:1px solid #edf1ee;margin-top:25px;direction:rtl">
+  جميع الحقوق محفوظة لدى محمد إبراهيم (40) © 2026
+</footer>
